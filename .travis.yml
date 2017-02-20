@@ -1,0 +1,25 @@
+language: c 
+compiler: gcc
+sudo: required
+install: 
+  - bash -ex .travis-ocaml.sh
+  - opam install conf-m4 
+  - opam install ocamlfind
+  - opam install base-bytes
+  - opam install ocamlbuild
+  - opam install ppx_tools
+  - opam install result
+  - opam install cppo
+  - opam install ppx_deriving 
+  - sudo apt-get install gcc-multilib
+script:
+  - eval `opam config env`
+  - test/test.sh
+  # - ./to_x86
+  # - make min-caml
+  # - make do_test
+env:
+  - OCAML_VERSION=4.03
+branches:
+  only: 
+    - trunk
